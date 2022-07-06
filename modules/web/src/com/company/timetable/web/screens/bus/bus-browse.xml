@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://busBrowse.caption"
+        focusComponent="busesTable"
+        messagesPack="com.company.timetable.web.screens.bus">
+    <data readOnly="true">
+        <collection id="busesDc"
+                    class="com.company.timetable.entity.Bus">
+            <view extends="_local"/>
+            <loader id="busesDl">
+                <query>
+                    <![CDATA[select e from timetable_Bus e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="busesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="busesTable"
+                dataLoader="busesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="busesTable"
+                    width="100%"
+                    dataContainer="busesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="busNumber"/>
+                <column id="driverName"/>
+                <column id="driverPhone"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="busesTable.create"/>
+                <button id="editBtn" action="busesTable.edit"/>
+                <button id="removeBtn" action="busesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://serviceBrowse.caption"
+        focusComponent="servicesTable"
+        messagesPack="com.company.timetable.web.screens.service">
+    <data readOnly="true">
+        <collection id="servicesDc"
+                    class="com.company.timetable.entity.Service">
+            <view extends="_local">
+                <property name="bus" view="_minimal"/>
+            </view>
+            <loader id="servicesDl">
+                <query>
+                    <![CDATA[select e from timetable_Service e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <facets>
+        <editorScreen id="serviceEditDialog" entityClass="com.company.timetable.entity.Service" container="servicesDc"
+                      screenClass="com.company.timetable.web.screens.service.ServiceEdit" openMode="DIALOG"
+                      editMode="EDIT"/>
+    </facets>
+    <layout expand="serviceTabSheet"
+            spacing="true">
+        <filter id="filter"
+                applyTo="servicesTable"
+                dataLoader="servicesDl">
+            <properties include=".*"/>
+        </filter>
+        <tabSheet id="serviceTabSheet">
+            <tab id="calendarTab" caption="msg://calendarTab.caption" margin="true,false,false,false" spacing="true"
+                 expand="serviceCalendar">
+                <calendar id="serviceCalendar" dataContainer="servicesDc" startDateProperty="startDate"
+                          endDateProperty="endDate" captionProperty="serviceType" descriptionProperty="description"
+                          firstVisibleHourOfDay="14" lastVisibleHourOfDay="4" navigationButtonsVisible="true"/>
+            </tab>
+            <tab id="tableTab" caption="msg://tableTab.caption" expand="servicesTable">
+                <groupTable id="servicesTable"
+                                    width="100%"
+                                    dataContainer="servicesDc">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="serviceType"/>
+                        <column id="startDate"/>
+                        <column id="duration"/>
+                        <column id="bus"/>
+                        <column id="description"/>
+                        <column id="endDate"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn" action="servicesTable.create"/>
+                        <button id="editBtn" action="servicesTable.edit"/>
+                        <button id="removeBtn" action="servicesTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
+            </tab>
+        </tabSheet>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

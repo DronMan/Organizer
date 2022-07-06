@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://serviceEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.timetable.web.screens.service">
+    <data>
+        <instance id="serviceDc"
+                  class="com.company.timetable.entity.Service">
+            <view extends="_local">
+                <property name="bus" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="auto"
+                width="auto"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="serviceDc">
+            <column width="350px">
+                <textField id="serviceTypeField" property="serviceType"/>
+                <dateField id="startDateField" property="startDate"/>
+                <textField id="durationField" property="duration"/>
+                <pickerField id="busField" property="bus">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <textArea id="descriptionField" property="description" rows="5"/>
+                <dateField id="endDateField" property="endDate"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,0 +1,2 @@
+alter table TIMETABLE_SERVICE add constraint FK_TIMETABLE_SERVICE_ON_BUS foreign key (BUS_ID) references TIMETABLE_BUS(ID);
+create index IDX_TIMETABLE_SERVICE_ON_BUS on TIMETABLE_SERVICE (BUS_ID);

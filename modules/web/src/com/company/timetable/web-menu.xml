@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="application-timetable" insertBefore="administration" caption="mainMsg://menu_config.application-timetable">
+        <item screen="timetable_Bus.browse" caption="mainMsg://menu_config.timetable_Bus.browse"/>
+        <item screen="timetable_Service.browse" caption="mainMsg://menu_config.timetable_Service.browse"/>
+    </menu>
+</menu-config>
